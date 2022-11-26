@@ -1,0 +1,26 @@
+
+
+rules for storage
+
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow write: if request.auth != null;
+      allow read;
+    }
+  }
+}
+
+
+
+
+
+rules for realtime database
+
+{
+  "rules": {
+    ".read": true,
+    ".write": "auth !== null ? true : false"
+  }
+}
