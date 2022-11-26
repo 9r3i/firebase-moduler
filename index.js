@@ -8,7 +8,6 @@ pre(fb);
 const log=await fb.login('email@gmail.com','password');
 //await fb.logout();
 pre(log);
-//*/
 
 /* database set and get */
 const post={
@@ -17,12 +16,11 @@ const post={
   content:'test content lagi',
   time:(new Date).getTime(),
 };
-//onst ins=await fb.set('posts',post.id,post);
-//pre(ins);
+const ins=await fb.set('posts',post.id,post);
+pre(ins);
 
 const sel=await fb.get('posts',post.id);
 pre(sel);
-//*/
 
 /* storage upload and download */
 const uid='<user_id>',
@@ -41,10 +39,6 @@ input.onchange=async function(e){
   const up=await fb.upload('pictures',uid+'.png',this.files[0]);
   pre(up);
 };
-//*/
-
-
-
 }
 
 function config(){
@@ -63,5 +57,4 @@ function config(){
 function pre(s,l){
   console.log(s,l);
 }
-
 
