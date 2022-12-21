@@ -5,6 +5,8 @@
 [![Stars](https://img.shields.io/github/stars/9r3i/firebase-moduler.svg)](https://github.com/9r3i/firebase-moduler/stargazers)
 [![Issues](https://img.shields.io/github/issues/9r3i/firebase-moduler.svg)](https://github.com/9r3i/firebase-moduler/issues)
 [![Release](https://img.shields.io/github/release/9r3i/firebase-moduler.svg)](https://github.com/9r3i/firebase-moduler/releases)
+[![Package](https://img.shields.io/npm/v/firebase-moduler.svg?label=npm)](https://www.npmjs.com/package/firebase-moduler)
+[![Donate](https://img.shields.io/badge/donate-paypal-orange.svg)](https://paypal.me/9r3i)
 
 
 # firebase-moduler
