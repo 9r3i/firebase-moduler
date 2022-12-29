@@ -83,3 +83,10 @@ function pre(s,l){
 
 ```
 
+
+# Closing
+That's all there is to it. Alhamdulillaah...
+
+
+
+
