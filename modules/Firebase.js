@@ -4,6 +4,26 @@ import { MFirebase } from "./MFirebase/MFirebase.js";
 const _mfb=new MFirebase;
 _mfb.config(config);
 this.MFirebase=_mfb;
+this.load=function(path,dirname,max){
+  const storage=new _mfb.Storage(path);
+  return storage.list(dirname,max);
+};
+this.loadAll=function(path,dirname){
+  const storage=new _mfb.Storage(path);
+  return new Promise(resolve=>{
+    storage.listAll(dirname,e=>{
+      resolve(e);
+    });
+  });
+};
+this.unload=function(path,filename){
+  const storage=new _mfb.Storage(path);
+  return new Promise(resolve=>{
+    storage.unlink(filename,e=>{
+      resolve(e);
+    });
+  });
+};
 this.download=function(path,filename){
   const storage=new _mfb.Storage(path);
   return new Promise(resolve=>{

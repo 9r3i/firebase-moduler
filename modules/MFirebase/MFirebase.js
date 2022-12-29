@@ -11,6 +11,9 @@ import {
   uploadString,
   getDownloadURL,
   uploadBytes,
+  deleteObject,
+  listAll,
+  list,
 } from "./9.6.3/firebase-storage.js";
 import {
   getDatabase,
@@ -29,7 +32,7 @@ import {
 
 /* primitive way */
 function MFirebase(){
-this.version='1.3.0';
+this.version='1.4.0';
 const _mfirebase={
   initializeApp:initializeApp,
   getAnalytics:getAnalytics,
@@ -124,12 +127,45 @@ this.set=function(k,v,cb){
 /* firebase storage */
 _mfirebase.Storage=function(path){
 this.path=typeof path==='string'?path:'unknown';
+this.nextPageToken=null;
 this.resource={
   storage:_mfirebase.getStorage(_mfirebase.firebaseApp),
   ref:ref,
   uploadString:uploadString,
   getDownloadURL:getDownloadURL,
   uploadBytes:uploadBytes,
+  deleteObject:deleteObject,
+  listAll:listAll,
+  list:list,
+};
+this.list=async function(f,mx){
+  mx=mx?parseInt(mx,10):100;
+  var opt={maxResults:mx};
+  if(this.nextPageToken){
+    opt.pageToken=this.nextPageToken;
+  }
+  var ref=this.resource.ref(this.resource.storage,this.path+'/'+f),
+  res=await this.resource.list(ref,opt);
+  if(!res){return false;}
+  if(res.hasOwnProperty('nextPageToken')){
+    this.nextPageToken=res.nextPageToken;
+  }
+  return {
+    items:res.items,
+    prefixes:res.prefixes,
+    full:res,
+  };
+};
+this.listAll=function(f,cb){
+  cb=typeof cb==='function'?cb:function(){};
+  var ref=this.resource.ref(this.resource.storage,this.path+'/'+f);
+  this.resource.listAll(ref).then(r=>{
+    return cb({
+      items:r.items,
+      prefixes:r.prefixes,
+      full:r,
+    });
+  });
 };
 this.get=function(f,cb){
   cb=typeof cb==='function'?cb:function(){};
@@ -144,6 +180,15 @@ this.set=function(f,c,cb){
   cb=typeof cb==='function'?cb:function(){};
   var ref=this.resource.ref(this.resource.storage,this.path+'/'+f);
   this.resource.uploadBytes(ref,c).then(cb).catch(cb);
+};
+this.unlink=function(f,cb){
+  cb=typeof cb==='function'?cb:function(){};
+  var ref=this.resource.ref(this.resource.storage,this.path+'/'+f);
+  this.resource.deleteObject(ref).then(r=>{
+    return cb(r);
+  }).catch(e=>{
+    return cb(false,e);
+  });
 };
 /* set string;c=base64-data, md=meta-data, up=upload-progress */
 this.setString=function(f,c,cb,md,up){
