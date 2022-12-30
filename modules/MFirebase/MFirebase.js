@@ -32,7 +32,6 @@ import {
 
 /* primitive way */
 function MFirebase(){
-this.version='1.4.0';
 const _mfirebase={
   initializeApp:initializeApp,
   getAnalytics:getAnalytics,
@@ -47,9 +46,13 @@ const _mfirebase={
   },
   user:null,
   Auth:null,
-  DB:null,
+  Database:null,
   Storage:null,
 };
+Object.defineProperty(_mfirebase,'version',{
+  value:'1.4.1',
+  writable:false,
+});
 /* firebase auth */
 _mfirebase.Auth=function(){
 this.resource={
