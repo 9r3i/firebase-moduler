@@ -1,10 +1,10 @@
 import {
   initializeApp,
-} from "./9.6.3/firebase-app.js";
+} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
 import {
   getAnalytics,
   setUserProperties,
-} from "./9.6.3/firebase-analytics.js";
+} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-analytics.js";
 import {
   getStorage,
   ref,
@@ -14,20 +14,20 @@ import {
   deleteObject,
   listAll,
   list,
-} from "./9.6.3/firebase-storage.js";
+} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-storage.js";
 import {
   getDatabase,
   ref as dbRef,
   set as dbSet,
   get as dbGet,
   child as dbChild,
-} from "./9.6.3/firebase-database.js";
+} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-database.js";
 import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
-} from "./9.6.3/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
 
 
 /* primitive way */
@@ -50,7 +50,7 @@ const _mfirebase={
   Storage:null,
 };
 Object.defineProperty(_mfirebase,'version',{
-  value:'1.4.1',
+  value:'1.5.0',
   writable:false,
 });
 /* firebase auth */
